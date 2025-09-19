@@ -6,3 +6,9 @@ export interface Note {
   createdAt: string;
   updatedAt: string;
 }
+
+export type NewNoteData = {
+  title: string;
+  content?: string;
+  tag: "Work" | "Personal" | "Meeting" | "Shopping" | "Todo";
+};
