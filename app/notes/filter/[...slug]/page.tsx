@@ -1,9 +1,10 @@
+import { Metadata } from "next";
 import { fetchNotes } from "@/lib/api";
 import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import NotesClient from "./Notes.client";
 import css from "./page.module.css";
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const category = slug[0] === "All" ? "All" : `${slug[0]}`;
 

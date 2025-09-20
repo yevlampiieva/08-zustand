@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "@/lib/api";
 import { useId } from "react";
 import { NewNoteData } from "@/types/note";
@@ -23,11 +23,13 @@ export default function NoteForm() {
 
   const fieldId = useId();
 
+  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: createNote,
     onSuccess() {
       toast.success("Your note has been created.");
       clearDraft();
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
       router.push("/notes/filter/All");
     },
     onError() {
